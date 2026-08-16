@@ -75,8 +75,8 @@
     <h2>ماذا سأفعل؟</h2>
     <p>ستستمع إلى <strong>أزواج من كلمات مختلقة</strong> وتجيب عن أسئلة بسيطة مثل "أي كلمة تبدو أثقل؟" لا توجد إجابات صحيحة أو خاطئة.</p>
     <ul>
-      <li>المدة: حوالي 5 دقائق</li>
-      <li>حوالي 33 سؤالاً (30 تجريبي + أسئلة انتباه)</li>
+      <li>المدة: حوالي 7 دقائق</li>
+      <li>حوالي 43 سؤالاً (40 تجريبي + أسئلة انتباه)</li>
       <li>يتطلب صوتاً — تأكد من أن جهازك يمكنه تشغيل الصوت</li>
     </ul>
     <h2>المخاطر والسرية</h2>
@@ -985,7 +985,7 @@ function downloadData() {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `study2_cn_best30_${Date.now()}.json`;
+  a.download = `study3b_ar_40_${Date.now()}.json`;
   a.click();
 }
 </script>

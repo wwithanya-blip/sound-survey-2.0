@@ -75,8 +75,8 @@
     <h2>What will I do?</h2>
     <p>You will <strong>listen to pairs of made-up words</strong> and answer simple questions like "Which word sounds heavier?" There are no right or wrong answers.</p>
     <ul>
-      <li>Duration: approximately 5 minutes</li>
-      <li>About 33 questions (30 experimental + attention checks)</li>
+      <li>Duration: approximately 7 minutes</li>
+      <li>About 43 questions (40 experimental + attention checks)</li>
       <li>Audio required — please ensure your device can play sound</li>
     </ul>
     <h2>Risks & Confidentiality</h2>
@@ -121,16 +121,6 @@
         <label><input type="radio" name="otherprof" value="beginner"> Beginner</label>
         <label><input type="radio" name="otherprof" value="intermediate"> Intermediate</label>
         <label><input type="radio" name="otherprof" value="fluent"> Fluent</label>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>How would you rate your proficiency in English?</label>
-      <div class="radio-group">
-        <label><input type="radio" name="engprof" value="native"> Native speaker</label>
-        <label><input type="radio" name="engprof" value="fluent"> Fluent</label>
-        <label><input type="radio" name="engprof" value="intermediate"> Intermediate</label>
-        <label><input type="radio" name="engprof" value="beginner"> Beginner</label>
-        <label><input type="radio" name="engprof" value="none"> None at all</label>
       </div>
     </div>
     <div class="form-group">
@@ -985,7 +975,7 @@ function downloadData() {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `study2_cn_best30_${Date.now()}.json`;
+  a.download = `study3b_en_40_${Date.now()}.json`;
   a.click();
 }
 </script>

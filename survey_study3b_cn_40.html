@@ -75,8 +75,8 @@
     <h2>我需要做什么？</h2>
     <p>您将<strong>聆听成对的虚构词语</strong>，并回答简单问题，如"哪个词听起来更重？"没有对错之分。</p>
     <ul>
-      <li>时长：约5分钟</li>
-      <li>约33道题（30道实验题 + 注意力检测题）</li>
+      <li>时长：约7分钟</li>
+      <li>约43道题（40道实验题 + 注意力检测题）</li>
       <li>需要音频播放 — 请确保您的设备可以播放声音</li>
     </ul>
     <h2>风险与保密性</h2>
@@ -985,7 +985,7 @@ function downloadData() {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `study2_cn_best30_${Date.now()}.json`;
+  a.download = `study3b_cn_40_${Date.now()}.json`;
   a.click();
 }
 </script>

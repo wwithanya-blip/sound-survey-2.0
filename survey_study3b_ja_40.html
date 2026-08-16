@@ -75,8 +75,8 @@
     <h2>何をしますか？</h2>
     <p><strong>架空の単語のペアを聴いて</strong>、「どちらがより重く聞こえますか？」などの簡単な質問に答えます。正解・不正解はありません。</p>
     <ul>
-      <li>所要時間：約5分</li>
-      <li>約33問（実験30問＋注意確認問題）</li>
+      <li>所要時間：約7分</li>
+      <li>約43問（実験40問＋注意確認問題）</li>
       <li>音声再生が必要です — 音が出る環境でお願いします</li>
     </ul>
     <h2>リスクと機密性</h2>
@@ -985,7 +985,7 @@ function downloadData() {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `study2_cn_best30_${Date.now()}.json`;
+  a.download = `study3b_ja_40_${Date.now()}.json`;
   a.click();
 }
 </script>

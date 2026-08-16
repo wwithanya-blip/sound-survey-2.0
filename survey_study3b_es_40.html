@@ -75,8 +75,8 @@
     <h2>¿Qué haré?</h2>
     <p>Usted <strong>escuchará pares de palabras inventadas</strong> y responderá preguntas simples como "¿Cuál suena más pesada?" No hay respuestas correctas ni incorrectas.</p>
     <ul>
-      <li>Duración: aproximadamente 5 minutos</li>
-      <li>Alrededor de 33 preguntas (30 experimentales + verificaciones de atención)</li>
+      <li>Duración: aproximadamente 7 minutos</li>
+      <li>Alrededor de 43 preguntas (40 experimentales + verificaciones de atención)</li>
       <li>Se requiere audio — asegúrese de que su dispositivo pueda reproducir sonido</li>
     </ul>
     <h2>Riesgos y Confidencialidad</h2>
@@ -985,7 +985,7 @@ function downloadData() {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = `study2_cn_best30_${Date.now()}.json`;
+  a.download = `study3b_es_40_${Date.now()}.json`;
   a.click();
 }
 </script>
