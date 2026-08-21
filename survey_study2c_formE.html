@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<meta http-equiv="Content-Language" content="en">
+<title>Word Perception Study</title>
+<!-- Study 2c Form E | 55 items | generated from study2c_items_220.csv -->
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #333; }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px; }
+  .screen { display: none; min-height: 80vh; }
+  .screen.active { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+  /* Consent & Instructions */
+  .info-box { background: #fff; border-radius: 12px; padding: 40px; box-shadow: 0 2px 12px rgba(0,0,0,.08); max-width: 640px; width: 100%; }
+  .info-box h1 { font-size: 22px; margin-bottom: 16px; color: #1a1a2e; }
+  .info-box h2 { font-size: 18px; margin: 20px 0 10px; color: #16213e; }
+  .info-box p, .info-box li { font-size: 15px; line-height: 1.7; margin-bottom: 8px; color: #444; }
+  .info-box ul { padding-left: 20px; }
+
+  .btn { display: inline-block; padding: 12px 32px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-primary { background: #4361ee; color: #fff; }
+  .btn-primary:hover { background: #3a56d4; transform: translateY(-1px); }
+  .btn-secondary { background: #e8ecf1; color: #555; }
+  .btn-secondary:hover { background: #dde1e8; }
+  .btn-group { margin-top: 24px; display: flex; gap: 12px; justify-content: center; }
+
+  /* Demographics */
+  .form-group { margin-bottom: 20px; text-align: left; width: 100%; }
+  .form-group label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 6px; }
+  .form-group input, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; }
+  .form-group .radio-group { display: flex; gap: 16px; flex-wrap: wrap; }
+  .form-group .radio-group label { font-weight: 400; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+
+  /* Trial */
+  .trial-container { text-align: center; width: 100%; }
+  .trial-question { font-size: 22px; font-weight: 600; color: #1a1a2e; margin-bottom: 40px; }
+  .trial-progress { font-size: 13px; color: #888; margin-bottom: 20px; }
+  .word-pair { display: flex; gap: 40px; justify-content: center; align-items: center; }
+  .word-btn { min-width: 200px; padding: 28px 24px; font-size: 28px; font-weight: 700; font-family: 'Courier New', monospace; letter-spacing: 2px; background: #fff; border: 2px solid #ddd; border-radius: 12px; cursor: pointer; transition: all .15s; color: #1a1a2e; }
+  .word-btn:hover { border-color: #4361ee; background: #f0f4ff; transform: scale(1.03); }
+  .word-btn:active { transform: scale(0.98); }
+  .or-divider { font-size: 16px; color: #aaa; font-weight: 600; }
+
+  /* Progress bar */
+  .progress-bar { width: 100%; height: 4px; background: #e8ecf1; border-radius: 2px; margin-bottom: 20px; }
+  .progress-fill { height: 100%; background: #4361ee; border-radius: 2px; transition: width .3s; }
+
+  /* End screen */
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .word-pair { flex-direction: column; gap: 16px; }
+    .word-btn { min-width: 160px; font-size: 22px; padding: 20px; }
+    .or-divider { display: none; }
+  }
+</style>
+</head>
+<body>
+<!-- 无 Prolific 门禁：任何人可直接打开作答 -->
+<div class="container">
+
+<!-- SCREEN 1: Consent -->
+<div class="screen active" id="screen-consent">
+  <div class="info-box">
+    <h1>Word Perception Study</h1>
+    
+    <h2>Purpose</h2>
+    <p>This study investigates how people associate the sounds of made-up words with certain qualities (e.g., size, weight, speed).</p>
+    <h2>What will I do?</h2>
+    <p>You will see pairs of made-up words and answer simple questions like "Which word feels bigger?" There are no right or wrong answers — we are interested in your intuitive responses.</p>
+    <ul>
+      <li>Duration: approximately 5–10 minutes</li>
+      <li>58 trials total (55 experimental + 3 attention checks)</li>
+    </ul>
+    <h2>Risks & Confidentiality</h2>
+    <p>This study involves minimal risk. Your responses are anonymous. No personally identifiable information is collected. Data may be shared on OSF upon publication.</p>
+    <h2>Voluntary Participation</h2>
+    <p>Participation is voluntary. You may withdraw at any time by closing this window.</p>
+    
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="showScreen('screen-demographics')">I Agree — Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 2: Demographics -->
+<div class="screen" id="screen-demographics">
+  <div class="info-box">
+    <h1>About You</h1>
+    <div class="form-group">
+      <label>Age</label>
+      <input type="number" id="demo-age" min="18" max="99" placeholder="e.g., 25">
+    </div>
+    <div class="form-group">
+      <label>Gender</label>
+      <div class="radio-group">
+        <label><input type="radio" name="gender" value="male"> Male</label>
+        <label><input type="radio" name="gender" value="female"> Female</label>
+        <label><input type="radio" name="gender" value="nonbinary"> Non-binary</label>
+        <label><input type="radio" name="gender" value="prefer_not"> Prefer not to say</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Native Language (first language)</label>
+      <input type="text" id="demo-lang" placeholder="e.g., English">
+    </div>
+    <div class="form-group">
+      <label>Other languages spoken fluently</label>
+      <input type="text" id="demo-langs" placeholder="e.g., Spanish, French (or none)">
+    </div>
+    <div class="form-group">
+      <label>Do you have any reading disabilities?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="reading" value="no"> No</label>
+        <label><input type="radio" name="reading" value="yes"> Yes</label>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="startExperiment()">Begin Study</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3: Instructions -->
+<div class="screen" id="screen-instructions">
+  <div class="info-box" style="text-align:center;">
+    <h1>Instructions</h1>
+    <p style="font-size:17px; margin:20px 0;">On each trial, you will see a question and two made-up words.</p>
+    <p style="font-size:17px; margin:20px 0;"><strong>Click the word that best matches your gut feeling.</strong></p>
+    <p style="font-size:17px; margin:20px 0;">There are no right or wrong answers. Please respond quickly and naturally.</p>
+    <div style="margin:30px 0; padding:24px; background:#f8f9ff; border-radius:8px;">
+      <p style="font-size:16px; color:#888; margin-bottom:16px;">Example:</p>
+      <p style="font-size:18px; font-weight:600; margin-bottom:20px;">Which word feels bigger?</p>
+      <div style="display:flex; gap:24px; justify-content:center;">
+        <span style="padding:16px 24px; background:#fff; border:2px solid #ddd; border-radius:8px; font-family:monospace; font-size:22px; font-weight:700;">zompa</span>
+        <span style="padding:16px 24px; background:#fff; border:2px solid #ddd; border-radius:8px; font-family:monospace; font-size:22px; font-weight:700;">zimpi</span>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="showScreen('screen-trial'); showTrial();">Start</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 4: Trial -->
+<div class="screen" id="screen-trial">
+  <div class="trial-container">
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="trial-progress" id="trial-progress"></div>
+    <div class="trial-question" id="trial-question"></div>
+    <div class="word-pair">
+      <button class="word-btn" id="word-left" onclick="respond('left')"></button>
+      <span class="or-divider">or</span>
+      <button class="word-btn" id="word-right" onclick="respond('right')"></button>
+    </div>
+    <button class="btn btn-secondary" id="back-btn" style="margin-top:28px;font-size:13px;padding:8px 20px;display:none;" onclick="goBack()">&#8592; Go Back</button>
+  </div>
+</div>
+
+<!-- SCREEN 5: End -->
+<div class="screen" id="screen-end">
+  <div class="info-box" style="text-align:center;">
+    <h1>Thank You!</h1>
+    <p style="font-size:17px; margin:20px 0;">Your responses have been recorded.</p>
+    <p style="margin:16px 0;">This study investigates sound symbolism — the idea that certain speech sounds are naturally associated with particular meanings or sensory qualities.</p>
+    <p style="margin:20px 0; font-weight:600;" id="end-note">Your responses have been submitted. You may now close this window.</p>
+    
+    <div id="download-fallback" style="display:none; margin-top:16px; padding:16px; background:#fff3cd; border-radius:8px;">
+      <p style="color:#856404; font-size:14px; margin-bottom:10px;">Data could not be sent automatically. Please download and send to the researcher.</p>
+      <button class="btn btn-primary" onclick="downloadData()">Download Data</button>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="downloadData()" style="font-size:13px;">Download Data (researcher)</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// ===== STIMULUS DATA =====
+const experimentalTrials = [
+{"item": 1, "contrast": "a_o", "category": "vowel", "dimension": "Speed", "scale": "slow - fast", "question": "Which pseudoword feels faster?", "word_a": "brarp", "word_b": "brorp", "predicted_word": "brarp", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.8102, "contrast_min_abs_d": 0.6582},
+{"item": 2, "contrast": "a_u", "category": "vowel", "dimension": "Brightness", "scale": "dark - bright", "question": "Which pseudoword feels brighter?", "word_a": "apab", "word_b": "upub", "predicted_word": "apab", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.2989, "contrast_min_abs_d": 0.8244},
+{"item": 3, "contrast": "b_g", "category": "consonant", "dimension": "Texture", "scale": "smooth - rough", "question": "Which pseudoword feels rougher?", "word_a": "emgug", "word_b": "embub", "predicted_word": "emgug", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 2.7485, "contrast_min_abs_d": 0.732},
+{"item": 4, "contrast": "b_l", "category": "consonant", "dimension": "Weight", "scale": "light - heavy", "question": "Which pseudoword feels heavier?", "word_a": "bevibi", "word_b": "levili", "predicted_word": "bevibi", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.1789, "contrast_min_abs_d": 0.613},
+{"item": 5, "contrast": "b_q", "category": "consonant", "dimension": "Pleasantness", "scale": "unpleasant - pleasant", "question": "Which pseudoword feels more pleasant?", "word_a": "elboub", "word_b": "elqouq", "predicted_word": "elboub", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.0225, "contrast_min_abs_d": 1.036},
+{"item": 6, "contrast": "b_x", "category": "consonant", "dimension": "Speed", "scale": "slow - fast", "question": "Which pseudoword feels faster?", "word_a": "xioxea", "word_b": "biobea", "predicted_word": "xioxea", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.9143, "contrast_min_abs_d": 0.8793},
+{"item": 7, "contrast": "c_k", "category": "consonant", "dimension": "Brightness", "scale": "dark - bright", "question": "Which pseudoword feels brighter?", "word_a": "uakoke", "word_b": "uacoce", "predicted_word": "uakoke", "sampling_weight": 1.0, "dimension_rank": 2, "item_min_abs_d": 0.1093, "contrast_min_abs_d": 0.3675},
+{"item": 8, "contrast": "c_l", "category": "consonant", "dimension": "Texture", "scale": "smooth - rough", "question": "Which pseudoword feels rougher?", "word_a": "oilei", "word_b": "oicei", "predicted_word": "oilei", "sampling_weight": 1.0, "dimension_rank": 2, "item_min_abs_d": 0.2751, "contrast_min_abs_d": 0.4405},
+{"item": 9, "contrast": "c_n", "category": "consonant", "dimension": "Pleasantness", "scale": "unpleasant - pleasant", "question": "Which pseudoword feels more pleasant?", "word_a": "aunuev", "word_b": "aucuev", "predicted_word": "aunuev", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.5657, "contrast_min_abs_d": 1.0082},
+{"item": 10, "contrast": "c_r", "category": "consonant", "dimension": "Size", "scale": "small - big", "question": "Which pseudoword feels bigger?", "word_a": "ripre", "word_b": "cipce", "predicted_word": "ripre", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.5277, "contrast_min_abs_d": 0.4977},
+{"item": 11, "contrast": "c_s", "category": "consonant", "dimension": "Pleasantness", "scale": "unpleasant - pleasant", "question": "Which pseudoword feels more pleasant?", "word_a": "sasea", "word_b": "cacea", "predicted_word": "sasea", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.5657, "contrast_min_abs_d": 0.9104},
+{"item": 12, "contrast": "d_j", "category": "consonant", "dimension": "Speed", "scale": "slow - fast", "question": "Which pseudoword feels faster?", "word_a": "lijir", "word_b": "lidir", "predicted_word": "lijir", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.2408, "contrast_min_abs_d": 0.8329},
+{"item": 13, "contrast": "d_k", "category": "consonant", "dimension": "Shape", "scale": "round - spiky", "question": "Which pseudoword feels spikier?", "word_a": "olokui", "word_b": "olodui", "predicted_word": "olokui", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.0, "contrast_min_abs_d": 0.8948},
+{"item": 14, "contrast": "d_l", "category": "consonant", "dimension": "Weight", "scale": "light - heavy", "question": "Which pseudoword feels heavier?", "word_a": "umeadu", "word_b": "umealu", "predicted_word": "umeadu", "sampling_weight": 1.0, "dimension_rank": 2, "item_min_abs_d": 0.6, "contrast_min_abs_d": 0.7418},
+{"item": 15, "contrast": "d_n", "category": "consonant", "dimension": "Brightness", "scale": "dark - bright", "question": "Which pseudoword feels brighter?", "word_a": "ensie", "word_b": "edsie", "predicted_word": "ensie", "sampling_weight": 1.0, "dimension_rank": 3, "item_min_abs_d": 1.4, "contrast_min_abs_d": 0.4187},
+{"item": 16, "contrast": "d_q", "category": "consonant", "dimension": "Texture", "scale": "smooth - rough", "question": "Which pseudoword feels rougher?", "word_a": "dodmes", "word_b": "qoqmes", "predicted_word": "dodmes", "sampling_weight": 1.0, "dimension_rank": 2, "item_min_abs_d": 0.4899, "contrast_min_abs_d": 0.5259},
+{"item": 17, "contrast": "d_r", "category": "consonant", "dimension": "Elevation", "scale": "low - high", "question": "Which pseudoword feels higher?", "word_a": "ruarbo", "word_b": "duadbo", "predicted_word": "ruarbo", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.6532, "contrast_min_abs_d": 0.516},
+{"item": 18, "contrast": "e_i", "category": "vowel", "dimension": "Speed", "scale": "slow - fast", "question": "Which pseudoword feels faster?", "word_a": "iptit", "word_b": "eptet", "predicted_word": "iptit", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.2697, "contrast_min_abs_d": 0.6904},
+{"item": 19, "contrast": "f_g", "category": "consonant", "dimension": "Weight", "scale": "light - heavy", "question": "Which pseudoword feels heavier?", "word_a": "gougub", "word_b": "foufub", "predicted_word": "gougub", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 1.4016, "contrast_min_abs_d": 1.0754},
+{"item": 20, "contrast": "f_n", "category": "consonant", "dimension": "Shape", "scale": "round - spiky", "question": "Which pseudoword feels spikier?", "word_a": "evfef", "word_b": "evnen", "predicted_word": "evfef", "sampling_weight": 1.0, "dimension_rank": 3, "item_min_abs_d": 0.8113, "contrast_min_abs_d": 0.3853},
+{"item": 21, "contrast": "f_q", "category": "consonant", "dimension": "Shape", "scale": "round - spiky", "question": "Which pseudoword feels spikier?", "word_a": "vemquq", "word_b": "vemfuf", "predicted_word": "vemquq", "sampling_weight": 1.0, "dimension_rank": 3, "item_min_abs_d": 0.5963, "contrast_min_abs_d": 0.4641},
+{"item": 22, "contrast": "f_z", "category": "consonant", "dimension": "Size", "scale": "small - big", "question": "Which pseudoword feels bigger?", "word_a": "azioso", "word_b": "afioso", "predicted_word": "azioso", "sampling_weight": 1.0, "dimension_rank": 2, "item_min_abs_d": 0.0908, "contrast_min_abs_d": 0.4795},
+{"item": 23, "contrast": "g_j", "category": "consonant", "dimension": "Weight", "scale": "light - heavy", "question": "Which pseudoword feels heavier?", "word_a": "agteog", "word_b": "ajteoj", "predicted_word": "agteog", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.0845, "contrast_min_abs_d": 0.7216},
+{"item": 24, "contrast": "g_m", "category": "consonant", "dimension": "Shape", "scale": "round - spiky", "question": "Which pseudoword feels spikier?", "word_a": "gezgeu", "word_b": "mezmeu", "predicted_word": "gezgeu", "sampling_weight": 1.0, "dimension_rank": 2, "item_min_abs_d": 1.113, "contrast_min_abs_d": 0.6908},
+{"item": 25, "contrast": "g_s", "category": "consonant", "dimension": "Pleasantness", "scale": "unpleasant - pleasant", "question": "Which pseudoword feels more pleasant?", "word_a": "osuaso", "word_b": "oguago", "predicted_word": "osuaso", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.7453, "contrast_min_abs_d": 0.8886},
+{"item": 26, "contrast": "g_v", "category": "consonant", "dimension": "Weight", "scale": "light - heavy", "question": "Which pseudoword feels heavier?", "word_a": "ogigau", "word_b": "ovivau", "predicted_word": "ogigau", "sampling_weight": 1.0, "dimension_rank": 2, "item_min_abs_d": 0.0636, "contrast_min_abs_d": 0.7834},
+{"item": 27, "contrast": "g_z", "category": "consonant", "dimension": "Speed", "scale": "slow - fast", "question": "Which pseudoword feels faster?", "word_a": "izsiez", "word_b": "igsieg", "predicted_word": "izsiez", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 1.2464, "contrast_min_abs_d": 0.6357},
+{"item": 28, "contrast": "h_p", "category": "consonant", "dimension": "Size", "scale": "small - big", "question": "Which pseudoword feels bigger?", "word_a": "iuhugo", "word_b": "iupugo", "predicted_word": "iuhugo", "sampling_weight": 1.0, "dimension_rank": 3, "item_min_abs_d": 0.2785, "contrast_min_abs_d": 0.3559},
+{"item": 29, "contrast": "h_w", "category": "consonant", "dimension": "Temperature", "scale": "cold - hot", "question": "Which pseudoword feels warmer?", "word_a": "henuh", "word_b": "wenuw", "predicted_word": "henuh", "sampling_weight": 1.0, "dimension_rank": 2, "item_min_abs_d": 0.4536, "contrast_min_abs_d": 0.3896},
+{"item": 30, "contrast": "h_y", "category": "consonant", "dimension": "Brightness", "scale": "dark - bright", "question": "Which pseudoword feels brighter?", "word_a": "sogyo", "word_b": "sogho", "predicted_word": "sogyo", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 1.8217, "contrast_min_abs_d": 0.7667},
+{"item": 31, "contrast": "i_o", "category": "vowel", "dimension": "Weight", "scale": "light - heavy", "question": "Which pseudoword feels heavier?", "word_a": "vovlor", "word_b": "vivlir", "predicted_word": "vovlor", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 2.9814, "contrast_min_abs_d": 2.2426},
+{"item": 32, "contrast": "i_u", "category": "vowel", "dimension": "Weight", "scale": "light - heavy", "question": "Which pseudoword feels heavier?", "word_a": "vuzu", "word_b": "vizi", "predicted_word": "vuzu", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 1.8385, "contrast_min_abs_d": 1.1762},
+{"item": 33, "contrast": "j_y", "category": "consonant", "dimension": "Brightness", "scale": "dark - bright", "question": "Which pseudoword feels brighter?", "word_a": "iydiy", "word_b": "ijdij", "predicted_word": "iydiy", "sampling_weight": 1.0, "dimension_rank": 2, "item_min_abs_d": 0.9396, "contrast_min_abs_d": 0.5481},
+{"item": 34, "contrast": "k_l", "category": "consonant", "dimension": "Pleasantness", "scale": "unpleasant - pleasant", "question": "Which pseudoword feels more pleasant?", "word_a": "okesbi", "word_b": "olesbi", "predicted_word": "okesbi", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.164, "contrast_min_abs_d": 0.943},
+{"item": 35, "contrast": "k_n", "category": "consonant", "dimension": "Texture", "scale": "smooth - rough", "question": "Which pseudoword feels rougher?", "word_a": "takuk", "word_b": "tanun", "predicted_word": "takuk", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 1.9781, "contrast_min_abs_d": 0.9036},
+{"item": 36, "contrast": "k_w", "category": "consonant", "dimension": "Texture", "scale": "smooth - rough", "question": "Which pseudoword feels rougher?", "word_a": "koaku", "word_b": "woawu", "predicted_word": "koaku", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.9307, "contrast_min_abs_d": 0.6093},
+{"item": 37, "contrast": "l_m", "category": "consonant", "dimension": "Elevation", "scale": "low - high", "question": "Which pseudoword feels higher?", "word_a": "iuleto", "word_b": "iumeto", "predicted_word": "iuleto", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.3592, "contrast_min_abs_d": 0.5834},
+{"item": 38, "contrast": "l_q", "category": "consonant", "dimension": "Pleasantness", "scale": "unpleasant - pleasant", "question": "Which pseudoword feels more pleasant?", "word_a": "eaduli", "word_b": "eaduqi", "predicted_word": "eaduli", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.4613, "contrast_min_abs_d": 2.0588},
+{"item": 39, "contrast": "l_s", "category": "consonant", "dimension": "Shape", "scale": "round - spiky", "question": "Which pseudoword feels spikier?", "word_a": "musdus", "word_b": "muldul", "predicted_word": "musdus", "sampling_weight": 1.0, "dimension_rank": 3, "item_min_abs_d": 0.2697, "contrast_min_abs_d": 0.305},
+{"item": 40, "contrast": "l_w", "category": "consonant", "dimension": "Elevation", "scale": "low - high", "question": "Which pseudoword feels higher?", "word_a": "auliol", "word_b": "auwiow", "predicted_word": "auliol", "sampling_weight": 1.0, "dimension_rank": 4, "item_min_abs_d": 0.5307, "contrast_min_abs_d": 0.3402},
+{"item": 41, "contrast": "l_y", "category": "consonant", "dimension": "Speed", "scale": "slow - fast", "question": "Which pseudoword feels faster?", "word_a": "ayiyi", "word_b": "alili", "predicted_word": "ayiyi", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.2174, "contrast_min_abs_d": 0.6461},
+{"item": 42, "contrast": "m_v", "category": "consonant", "dimension": "Elevation", "scale": "low - high", "question": "Which pseudoword feels higher?", "word_a": "veniev", "word_b": "meniem", "predicted_word": "veniev", "sampling_weight": 1.0, "dimension_rank": 2, "item_min_abs_d": 0.6325, "contrast_min_abs_d": 0.5225},
+{"item": 43, "contrast": "n_r", "category": "consonant", "dimension": "Texture", "scale": "smooth - rough", "question": "Which pseudoword feels rougher?", "word_a": "ormadi", "word_b": "onmadi", "predicted_word": "ormadi", "sampling_weight": 1.0, "dimension_rank": 2, "item_min_abs_d": 0.3348, "contrast_min_abs_d": 0.4615},
+{"item": 44, "contrast": "n_t", "category": "consonant", "dimension": "Shape", "scale": "round - spiky", "question": "Which pseudoword feels spikier?", "word_a": "aotate", "word_b": "aonane", "predicted_word": "aotate", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.373, "contrast_min_abs_d": 0.5598},
+{"item": 45, "contrast": "p_z", "category": "consonant", "dimension": "Size", "scale": "small - big", "question": "Which pseudoword feels bigger?", "word_a": "zimefo", "word_b": "pimefo", "predicted_word": "zimefo", "sampling_weight": 1.0, "dimension_rank": 3, "item_min_abs_d": 0.0, "contrast_min_abs_d": 0.4084},
+{"item": 46, "contrast": "q_v", "category": "consonant", "dimension": "Pleasantness", "scale": "unpleasant - pleasant", "question": "Which pseudoword feels more pleasant?", "word_a": "oivave", "word_b": "oiqaqe", "predicted_word": "oivave", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 2.3666, "contrast_min_abs_d": 1.2107},
+{"item": 47, "contrast": "q_w", "category": "consonant", "dimension": "Pleasantness", "scale": "unpleasant - pleasant", "question": "Which pseudoword feels more pleasant?", "word_a": "wiaweu", "word_b": "qiaqeu", "predicted_word": "wiaweu", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 1.0622, "contrast_min_abs_d": 0.9836},
+{"item": 48, "contrast": "q_z", "category": "consonant", "dimension": "Speed", "scale": "slow - fast", "question": "Which pseudoword feels faster?", "word_a": "ozetaz", "word_b": "oqetaq", "predicted_word": "ozetaz", "sampling_weight": 1.0, "dimension_rank": 2, "item_min_abs_d": 0.3795, "contrast_min_abs_d": 0.4768},
+{"item": 49, "contrast": "r_t", "category": "consonant", "dimension": "Texture", "scale": "smooth - rough", "question": "Which pseudoword feels rougher?", "word_a": "upiror", "word_b": "upitot", "predicted_word": "upiror", "sampling_weight": 1.0, "dimension_rank": 2, "item_min_abs_d": 0.3723, "contrast_min_abs_d": 0.3868},
+{"item": 50, "contrast": "r_v", "category": "consonant", "dimension": "Texture", "scale": "smooth - rough", "question": "Which pseudoword feels rougher?", "word_a": "oirura", "word_b": "oivuva", "predicted_word": "oirura", "sampling_weight": 1.0, "dimension_rank": 3, "item_min_abs_d": 0.1633, "contrast_min_abs_d": 0.3729},
+{"item": 51, "contrast": "s_v", "category": "consonant", "dimension": "Texture", "scale": "smooth - rough", "question": "Which pseudoword feels rougher?", "word_a": "siaso", "word_b": "viavo", "predicted_word": "siaso", "sampling_weight": 1.0, "dimension_rank": 4, "item_min_abs_d": 0.0, "contrast_min_abs_d": 0.3818},
+{"item": 52, "contrast": "s_w", "category": "consonant", "dimension": "Size", "scale": "small - big", "question": "Which pseudoword feels bigger?", "word_a": "ilsia", "word_b": "ilwia", "predicted_word": "ilsia", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.373, "contrast_min_abs_d": 0.4004},
+{"item": 53, "contrast": "s_x", "category": "consonant", "dimension": "Pleasantness", "scale": "unpleasant - pleasant", "question": "Which pseudoword feels more pleasant?", "word_a": "ursoas", "word_b": "urxoax", "predicted_word": "ursoas", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 3.5839, "contrast_min_abs_d": 1.3789},
+{"item": 54, "contrast": "v_y", "category": "consonant", "dimension": "Pleasantness", "scale": "unpleasant - pleasant", "question": "Which pseudoword feels more pleasant?", "word_a": "eyriy", "word_b": "evriv", "predicted_word": "eyriy", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 2.1025, "contrast_min_abs_d": 1.2038},
+{"item": 55, "contrast": "w_x", "category": "consonant", "dimension": "Shape", "scale": "round - spiky", "question": "Which pseudoword feels spikier?", "word_a": "atxoar", "word_b": "atwoar", "predicted_word": "atxoar", "sampling_weight": 1.0, "dimension_rank": 1, "item_min_abs_d": 0.2236, "contrast_min_abs_d": 1.4274}
+];
+
+const attentionChecks = [
+  { item: "AC1", dimension: "attention", question: "Which word feels bigger?", word_a: "mouse", word_b: "elephant", predicted_word: "elephant", is_attention: true },
+  { item: "AC2", dimension: "attention", question: "Which word feels faster?", word_a: "turtle", word_b: "rocket", predicted_word: "rocket", is_attention: true },
+  { item: "AC3", dimension: "attention", question: "Please select the word on the LEFT side.", word_a: "flurp", word_b: "flerp", predicted_word: "__LEFT__", is_attention: true },
+];
+
+// ===== STATE =====
+let allTrials = [];
+let currentTrial = 0;
+let results = [];
+let demographics = {};
+let startTime = null;
+let trialStartTime = null;
+const IRB_PROTOCOL = "ACYY1798";   // ← 若 IRB modification 后编号有变，改这里
+
+// ===== DATA COLLECTION ENDPOINTS =====
+// Google Sheets (works outside China)
+const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbyCaHqoMtFLGCnzpwHsGM_3bma4RIGYSUXXv8tcV-P6QhL-zrn17KiAiKBJv4eP8ha4/exec";
+// Server酱 (works in China, pushes to WeChat) — replace with your SendKey
+const SERVERCHAN_SENDKEY = "";  // 本研究不用 Server酱，留空即可
+
+// 被试编号：URL 里带 PID 就用它，否则自动生成一个匿名编号
+const urlParams = new URLSearchParams(window.location.search);
+const PROLIFIC_PID = urlParams.get('PROLIFIC_PID') ||
+  ("anon_" + new Date().toISOString().slice(0,19).replace(/[:T-]/g,'') + "_" +
+   Math.random().toString(36).slice(2,8));
+const STUDY_ID = urlParams.get('STUDY_ID') || "";
+const SESSION_ID = urlParams.get('SESSION_ID') || "";
+
+// ===== FUNCTIONS =====
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startExperiment() {
+  // Collect demographics
+  demographics = {
+    age: document.getElementById('demo-age').value,
+    gender: document.querySelector('input[name="gender"]:checked')?.value || "",
+    native_language: document.getElementById('demo-lang').value,
+    other_languages: document.getElementById('demo-langs').value,
+    reading_disability: document.querySelector('input[name="reading"]:checked')?.value || "",
+  };
+
+  // Validate
+  if (!demographics.age || !demographics.gender || !demographics.native_language) {
+    alert("Please complete all required fields (age, gender, native language).");
+    return;
+  }
+
+  // Build trial list: shuffle experimental, insert attention checks at random positions
+  let exp = shuffle(experimentalTrials.map(t => ({...t, is_attention: false})));
+
+  // Insert attention checks at positions ~14, ~28, ~42 (evenly across 55 trials)
+  const positions = [
+    Math.floor(Math.random() * 4) + 12,  // around trial 14
+    Math.floor(Math.random() * 4) + 26,  // around trial 28
+    Math.floor(Math.random() * 4) + 40,  // around trial 42
+  ];
+  positions.sort((a, b) => b - a); // insert from back
+  for (let i = 0; i < attentionChecks.length; i++) {
+    exp.splice(positions[i], 0, attentionChecks[i]);
+  }
+
+  allTrials = exp;
+  currentTrial = 0;
+  startTime = Date.now();
+
+  showScreen('screen-instructions');
+}
+
+function showTrial() {
+  if (currentTrial >= allTrials.length) {
+    finishExperiment();
+    return;
+  }
+
+  const trial = allTrials[currentTrial];
+  const total = allTrials.length;
+  const pct = ((currentTrial) / total * 100).toFixed(0);
+
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('trial-progress').textContent = `Trial ${currentTrial + 1} of ${total}`;
+  document.getElementById('trial-question').textContent = trial.question;
+
+  // Randomize left/right position
+  const swapped = Math.random() < 0.5;
+  const leftWord = swapped ? trial.word_b : trial.word_a;
+  const rightWord = swapped ? trial.word_a : trial.word_b;
+
+  document.getElementById('word-left').textContent = leftWord;
+  document.getElementById('word-right').textContent = rightWord;
+
+  // Store position mapping for this trial
+  allTrials[currentTrial]._swapped = swapped;
+  allTrials[currentTrial]._leftWord = leftWord;
+  allTrials[currentTrial]._rightWord = rightWord;
+
+  // Show/hide back button
+  document.getElementById('back-btn').style.display = currentTrial > 0 ? 'inline-block' : 'none';
+
+  trialStartTime = Date.now();
+
+  // Disable buttons briefly to prevent accidental double-clicks
+  document.getElementById('word-left').disabled = true;
+  document.getElementById('word-right').disabled = true;
+  setTimeout(() => {
+    document.getElementById('word-left').disabled = false;
+    document.getElementById('word-right').disabled = false;
+  }, 200);
+}
+
+function goBack() {
+  if (currentTrial > 0) {
+    currentTrial--;
+    results.pop(); // Remove last response
+    showTrial();
+  }
+}
+
+function respond(side) {
+  const trial = allTrials[currentTrial];
+  const rt = Date.now() - trialStartTime;
+  const chosenWord = side === 'left' ? trial._leftWord : trial._rightWord;
+
+  // Determine if chose predicted word
+  let correct;
+  if (trial.predicted_word === "__LEFT__") {
+    correct = side === 'left';
+  } else {
+    correct = chosenWord === trial.predicted_word;
+  }
+
+  results.push({
+    trial_number: currentTrial + 1,
+    item: trial.item,
+    contrast: trial.contrast || "",
+    category: trial.category || "",
+    dimension: trial.dimension,
+    sampling_weight: trial.sampling_weight ?? "",
+    dimension_rank: trial.dimension_rank ?? "",
+    item_min_abs_d: trial.item_min_abs_d ?? "",
+    contrast_min_abs_d: trial.contrast_min_abs_d ?? "",
+    question: trial.question,
+    word_a: trial.word_a,
+    word_b: trial.word_b,
+    predicted_word: trial.predicted_word,
+    position_left: trial._leftWord,
+    position_right: trial._rightWord,
+    chosen_side: side,
+    chosen_word: chosenWord,
+    chose_predicted: correct,
+    is_attention: trial.is_attention || false,
+    rt_ms: rt,
+  });
+
+  currentTrial++;
+  showTrial();
+}
+
+async function finishExperiment() {
+  const totalTime = Math.round((Date.now() - startTime) / 1000);
+  document.getElementById('progress-fill').style.width = '100%';
+  showScreen('screen-end');
+
+  // Log summary
+  const attChecks = results.filter(r => r.is_attention);
+  const attCorrect = attChecks.filter(r => r.chose_predicted).length;
+  console.log(`Completed in ${totalTime}s. Attention checks: ${attCorrect}/${attChecks.length}`);
+
+  const payload = {
+    study: "study2c_formE",
+    protocol: IRB_PROTOCOL,
+    
+    timestamp: new Date().toISOString(),
+    participant_id: PROLIFIC_PID,
+    study_id: STUDY_ID,
+    session_id: SESSION_ID,
+    demographics,
+    total_time_seconds: totalTime,
+    results,
+  };
+
+  let sent = false;
+
+  // 1) Try Server酱 (works in China, pushes to WeChat)
+  if (SERVERCHAN_SENDKEY && SERVERCHAN_SENDKEY !== "YOUR_SENDKEY_HERE") {
+    try {
+      const title = `Study1 Data - ${demographics.native_language || 'unknown'} - ${new Date().toLocaleString()}`;
+      const desp = JSON.stringify(payload, null, 2);
+      await fetch(`https://sctapi.ftqq.com/${SERVERCHAN_SENDKEY}.send`, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `title=${encodeURIComponent(title)}&desp=${encodeURIComponent(desp)}`,
+      });
+      console.log("Data submitted via Server酱 to WeChat");
+      sent = true;
+    } catch (err) {
+      console.warn("Server酱 submit failed:", err);
+    }
+  }
+
+  // 2) Try Google Sheets (works outside China)
+  if (GOOGLE_SHEET_URL && GOOGLE_SHEET_URL !== "YOUR_APPS_SCRIPT_URL_HERE") {
+    try {
+      // 先在本地留一份，任何情况下都不丢
+      try { localStorage.setItem('study2c_backup_' + Date.now(), JSON.stringify(payload)); } catch (e) {}
+      // text/plain 不触发 CORS 预检，因此无需跨源豁免模式，能读到真实响应
+      const resp = await fetch(GOOGLE_SHEET_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload),
+      });
+      const txt = await resp.text();
+      console.log("Sheets response:", txt);
+      if (resp.ok && txt.indexOf('"status":"ok"') >= 0) {
+        sent = true;
+      } else {
+        console.warn("Sheets rejected the submission:", txt);
+      }
+    } catch (err) {
+      console.warn("Google Sheets submit failed:", err);
+    }
+  }
+
+  // 3) If both failed, show download button prominently
+  if (!sent) {
+    const dlBtn = document.getElementById('download-fallback');
+    if (dlBtn) dlBtn.style.display = 'block';
+  }
+}
+
+function downloadData() {
+  const data = {
+    study: "study2c_formE",
+    protocol: IRB_PROTOCOL,
+    
+    timestamp: new Date().toISOString(),
+    demographics,
+    total_time_seconds: Math.round((Date.now() - startTime) / 1000),
+    results,
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `study2c_formE_${Date.now()}.json`;
+  a.click();
+}
+</script>
+</body>
+</html>
