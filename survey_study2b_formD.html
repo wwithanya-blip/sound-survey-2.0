@@ -169,7 +169,6 @@
     <p style="font-size:17px; margin:20px 0;">Your responses have been recorded.</p>
     <p style="margin:16px 0;">This study investigates sound symbolism — the idea that certain speech sounds are naturally associated with particular meanings or sensory qualities.</p>
     <p style="margin:20px 0; font-weight:600;" id="end-note">Your responses have been submitted. You may now close this window.</p>
-    <p style="font-size:14px; color:#666; display:none;" id="prolific-line">If you are not redirected automatically, <a href="https://app.prolific.com/submissions/complete?cc=REPLACE_WITH_FORMD_CODE" id="prolific-redirect-link">click here</a>.</p>
     
     <div id="download-fallback" style="display:none; margin-top:16px; padding:16px; background:#fff3cd; border-radius:8px;">
       <p style="color:#856404; font-size:14px; margin-bottom:10px;">Data could not be sent automatically. Please download and send to the researcher.</p>
@@ -257,7 +256,6 @@ let demographics = {};
 let startTime = null;
 let trialStartTime = null;
 const IRB_PROTOCOL = "ACYY1798";   // ← 若 IRB modification 后编号有变，改这里
-const PROLIFIC_CODE = "REPLACE_WITH_FORMD_CODE";  // ← 在 Prolific 建好研究后填入
 
 // ===== DATA COLLECTION ENDPOINTS =====
 // Google Sheets (works outside China)
@@ -267,7 +265,6 @@ const SERVERCHAN_SENDKEY = "";  // 本研究不用 Server酱，留空即可
 
 // Extract Prolific URL parameters
 const urlParams = new URLSearchParams(window.location.search);
-const IS_PROLIFIC = !!urlParams.get('PROLIFIC_PID');
 const PROLIFIC_PID = urlParams.get('PROLIFIC_PID') ||
   ("anon_" + new Date().toISOString().slice(0,19).replace(/[:T-]/g,'') + "_" +
    Math.random().toString(36).slice(2,8));
@@ -484,17 +481,6 @@ async function finishExperiment() {
   if (!sent) {
     const dlBtn = document.getElementById('download-fallback');
     if (dlBtn) dlBtn.style.display = 'block';
-  }
-
-  // 4) 只有通过 Prolific 进来的被试才跳回 Prolific；直接打开的不跳转
-  if (IS_PROLIFIC) {
-    const note = document.getElementById('end-note');
-    if (note) note.textContent = 'Redirecting you back to Prolific...';
-    const pl = document.getElementById('prolific-line');
-    if (pl) pl.style.display = 'block';
-    setTimeout(() => {
-      window.location.href = "https://app.prolific.com/submissions/complete?cc=REPLACE_WITH_FORMD_CODE";
-    }, 3000);
   }
 }
 
