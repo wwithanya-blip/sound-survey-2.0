@@ -766,6 +766,13 @@ function goToAudioCheck() {
     other_languages: document.getElementById('demo-langs').value,
     english_listening: document.querySelector('input[name="englis"]:checked')?.value || "",
     english_overall: document.querySelector('input[name="engove"]:checked')?.value || "",
+    // 线上 Apps Script 的列名还是 Study 3a 那一套，只认下面这两个键。加成别名把值送进
+    // 现成的两列，省得改脚本重新部署。注意列名与内容不符，分析时以这里为准：
+    //     english_proficiency        列  =  听力自评（englis，H3 主指标）
+    //     other_language_proficiency 列  =  总体英语水平（engove）
+    // 上面两个语义正确的键也一起送，老脚本会忽略；将来脚本更新了不必再改问卷。
+    english_proficiency: document.querySelector('input[name="englis"]:checked')?.value || "",
+    other_language_proficiency: document.querySelector('input[name="engove"]:checked')?.value || "",
     hearing_impairment: document.querySelector('input[name="hearing"]:checked')?.value || "",
   };
   if (!demographics.age || !demographics.gender || !demographics.native_language) {
